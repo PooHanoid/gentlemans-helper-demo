@@ -1,0 +1,42 @@
+{
+  "format": "gentlemans-helper-pack",
+  "version": "2026-09-25",
+  "profiles": [
+    {
+      "id": "demo-v1",
+      "when": ["#player.gh-demo"],
+      "marker": { "selector": ".screen .counter" },
+      "markerDecides": true,
+      "kind": {
+        "selector": ".screen .counter + .kind",
+        "values": [
+          { "text": "^select$", "mode": "single" },
+          { "text": "^true or false$", "mode": "single" },
+          { "text": "^multiple choices$", "mode": "multi" }
+        ]
+      },
+      "question": ".screen .stem",
+      "options": ".screen li.option",
+      "optionText": ".text",
+      "optionLabel": ".label",
+      "optionChecked": ".chosen, .correct, .wrong",
+      "confirm": "button.action",
+      "action": {
+        "selector": "button.action",
+        "pending": "^confirm$",
+        "ended": "^next$"
+      },
+      "course": {
+        "selector": "header h1",
+        "strip": "^Sample course:\\s*"
+      }
+    }
+  ],
+  "questions": {
+    "Office fire safety": {
+      "What should you do first when you discover a small fire in the office?": "Raise the alarm",
+      "Fire doors may be propped open during working hours.": "False",
+      "Which of these belong in a first-aid kit?": "Plasters; Sterile dressings; Disposable gloves"
+    }
+  }
+}

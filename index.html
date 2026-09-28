@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sample course · Gentleman's Helper demo</title>
+<meta name="description" content="A small self-contained e-learning course used to demonstrate the Gentleman's Helper Safari extension.">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f4f6fa; --card: #ffffff; --ink: #1d2430; --muted: #6b7280; --line: #e3e7ee;
+    --accent: #2f6fed; --chosen: #e8f0ff; --ok: #1f9d55; --ok-bg: #e6f6ec; --bad: #d64545; --bad-bg: #fbe9e9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #12161d; --card: #1b212b; --ink: #e8ecf3; --muted: #9aa4b2; --line: #2a3240;
+            --chosen: #22304a; --ok-bg: #163524; --bad-bg: #3a1f1f; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, system-ui, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink); }
+  #player { max-width: 720px; margin: 0 auto; padding: 24px 16px 48px; }
+  header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+           border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 24px; }
+  header h1 { font-size: 18px; margin: 0; font-weight: 600; }
+  #progress { color: var(--muted); font-size: 13px; white-space: nowrap; }
+  .screen { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px; }
+  .counter { margin: 0 0 4px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .kind { margin: 0 0 20px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+  .stem { font-size: 22px; line-height: 1.35; margin: 0 0 24px; font-weight: 600; }
+  .options { list-style: none; margin: 0 0 24px; padding: 0; }
+  .option { display: flex; align-items: center; gap: 14px; border: 1px solid var(--line); border-radius: 10px;
+            padding: 14px 16px; margin: 10px 0; cursor: pointer; user-select: none; -webkit-user-select: none; }
+  .option .label { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); flex: none;
+                   display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--muted); }
+  .option.chosen { background: var(--chosen); border-color: var(--accent); }
+  .option.correct { background: var(--ok-bg); border-color: var(--ok); }
+  .option.wrong { background: var(--bad-bg); border-color: var(--bad); }
+  .screen.locked .option { cursor: default; }
+  button { appearance: none; border: 0; border-radius: 10px; background: var(--accent); color: #fff;
+           font: 600 16px/1 -apple-system, system-ui, sans-serif; padding: 14px 24px; cursor: pointer; }
+  button:disabled { opacity: .45; cursor: default; }
+  .slide h2, .done h2 { font-size: 24px; margin: 0 0 12px; }
+  .slide p, .done p { font-size: 17px; line-height: 1.55; margin: 0 0 20px; }
+  .done a { color: var(--muted); }
+  footer { margin-top: 24px; color: var(--muted); font-size: 12px; text-align: center; line-height: 1.5; }
+</style>
+</head>
+<body>
+<!-- A sample e-learning course: one page, a few screens, no server. It is the
+     page the extension is demonstrated on, and the profile in the sample
+     pack (sample-pack.json) describes exactly this markup: the shell
+     (#player.gh-demo), the counter above a question, the kind line under it,
+     the stem, the option rows with their paint classes, and the one button
+     that says Confirm and then Next. -->
+<main id="player" class="gh-demo">
+  <header>
+    <h1>Sample course: Office fire safety</h1>
+    <span id="progress"></span>
+  </header>
+  <div id="screen"></div>
+  <footer>A sample course used to demonstrate the Gentleman's Helper Safari extension.<br>Nothing here is real safety training.</footer>
+</main>
+
+<script>
+(function () {
+  // The course: what each screen shows, and — for the question screens —
+  // which options the course itself counts as right. That key is the
+  // course's own, for painting the rows after Confirm; the extension never
+  // reads it. What the extension knows comes from the pack the user loaded.
+  var SCREENS = [
+    { type: 'intro', title: 'Welcome to the sample course',
+      text: 'Four short questions and one slide. Open the extension’s popup, load the sample pack, press START, and watch.',
+      button: 'Start course' },
+    { type: 'question', kind: 'Select',
+      stem: 'What should you do first when you discover a small fire in the office?',
+      options: ['Open the windows to let the smoke out', 'Raise the alarm', 'Finish your phone call'],
+      correct: [1] },
+    { type: 'question', kind: 'True or False',
+      stem: 'Fire doors may be propped open during working hours.',
+      options: ['True', 'False'],
+      correct: [1] },
+    { type: 'slide', title: 'Fire safety in three lines',
+      text: 'Know where the exits are. Keep them clear. When the alarm sounds, leave at once and do not go back for belongings.',
+      button: 'Next' },
+    { type: 'question', kind: 'Multiple choices',
+      stem: 'Which of these belong in a first-aid kit?',
+      options: ['Plasters', 'Sterile dressings', 'A stapler', 'Disposable gloves'],
+      correct: [0, 1, 3] },
+    // Not in the sample pack, on purpose: the extension must say so and
+    // leave the question to the learner.
+    { type: 'question', kind: 'Select',
+      stem: 'Which extinguisher is meant for a fire in electrical equipment?',
+      options: ['Water', 'CO₂', 'Foam'],
+      correct: [1] },
+    { type: 'done', title: 'Course completed',
+      text: 'You have completed the sample course.' },
+  ];
+
+  var at = 0, chosen = [], locked = false;
+  var player = document.getElementById('player');
+  var screenEl = document.getElementById('screen');
+  var progress = document.getElementById('progress');
+  // What the page saw happen, in order — for anyone testing the extension
+  // against this page: 'press:<button>', 'chosen:<indices>', 'confirm:<indices>'.
+  var log = window.__demoLog = [];
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function has(i) { return chosen.indexOf(i) >= 0; }
+  function key() { return chosen.slice().sort(function (a, b) { return a - b; }).join(','); }
+
+  function render() {
+    var s = SCREENS[at];
+    chosen = []; locked = false;
+    player.setAttribute('data-screen', String(at));
+    progress.textContent = 'Screen ' + (at + 1) + ' of ' + SCREENS.length;
+    if (s.type === 'question') {
+      var n = 0;
+      for (var i = 0; i <= at; i++) if (SCREENS[i].type === 'question') n++;
+      screenEl.innerHTML =
+        '<section class="screen question">' +
+        '<p class="counter">Question ' + n + '</p>' +
+        '<p class="kind">' + esc(s.kind) + '</p>' +
+        '<h2 class="stem">' + esc(s.stem) + '</h2>' +
+        '<ul class="options">' +
+        s.options.map(function (o, i) {
+          return '<li class="option" data-i="' + i + '"><span class="label">' + String.fromCharCode(97 + i) + '</span><span class="text">' + esc(o) + '</span></li>';
+        }).join('') +
+        '</ul>' +
+        '<button class="action" disabled>Confirm</button>' +
+        '</section>';
+    } else if (s.type === 'done') {
+      screenEl.innerHTML =
+        '<section class="screen done"><h2>' + esc(s.title) + '</h2><p>' + esc(s.text) + '</p>' +
+        '<a href="#" class="close">Close</a></section>';
+    } else {
+      screenEl.innerHTML =
+        '<section class="screen slide"><h2>' + esc(s.title) + '</h2><p>' + esc(s.text) + '</p>' +
+        '<button class="start">' + esc(s.button) + '</button></section>';
+    }
+  }
+
+  screenEl.addEventListener('click', function (ev) {
+    var s = SCREENS[at];
+    var opt = ev.target.closest('li.option');
+    if (opt && s.type === 'question' && !locked) {
+      var i = +opt.getAttribute('data-i');
+      if (s.kind === 'Multiple choices') {
+        if (has(i)) chosen.splice(chosen.indexOf(i), 1); else chosen.push(i);
+      } else {
+        chosen = [i];
+      }
+      var rows = screenEl.querySelectorAll('li.option');
+      for (var r = 0; r < rows.length; r++) rows[r].classList.toggle('chosen', has(+rows[r].getAttribute('data-i')));
+      screenEl.querySelector('button.action').disabled = chosen.length === 0;
+      log.push('chosen:' + key());
+      return;
+    }
+    var btn = ev.target.closest('button');
+    if (btn && btn.classList.contains('start')) {
+      log.push('press:' + btn.textContent.trim());
+      at++; render();
+      return;
+    }
+    if (btn && btn.classList.contains('action')) {
+      if (btn.disabled) return;
+      if (!locked) {
+        // Confirm: the course paints each chosen row right or wrong, locks
+        // the rows, and the same button now leads on.
+        locked = true;
+        screenEl.querySelector('.screen').classList.add('locked');
+        var all = screenEl.querySelectorAll('li.option');
+        for (var k = 0; k < all.length; k++) {
+          var idx = +all[k].getAttribute('data-i');
+          all[k].classList.remove('chosen');
+          if (has(idx)) all[k].classList.add(s.correct.indexOf(idx) >= 0 ? 'correct' : 'wrong');
+        }
+        log.push('confirm:' + key());
+        btn.textContent = 'Next';
+        return;
+      }
+      log.push('press:Next');
+      at++; render();
+      return;
+    }
+    var close = ev.target.closest('a.close');
+    if (close) { ev.preventDefault(); log.push('press:Close'); }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
