@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Поддержка · Support — Gentleman's Helper</title>
+<meta name="description" content="Поддержка Gentleman's Helper: настройка, пример пакета, формат пакета, вопросы и ответы. Support for Gentleman's Helper: setup, the sample pack, the pack format, FAQ.">
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f4f6fa; --card: #ffffff; --ink: #1d2430; --muted: #6b7280; --line: #e3e7ee;
+    --accent: #2f6fed;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #12161d; --card: #1b212b; --ink: #e8ecf3; --muted: #9aa4b2; --line: #2a3240; --accent: #6f9bff; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, system-ui, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--ink);
+         -webkit-text-size-adjust: 100%; }
+  main { max-width: 720px; margin: 0 auto; padding: 24px 16px 48px; }
+  header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 16px;
+           border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 24px; }
+  header h1 { font-size: 18px; margin: 0; font-weight: 600; }
+  nav { font-size: 14px; color: var(--muted); }
+  a { color: var(--accent); }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 24px; margin: 0 0 24px; }
+  h2 { font-size: 24px; line-height: 1.25; margin: 0 0 16px; }
+  h3 { font-size: 17px; margin: 28px 0 8px; }
+  h4 { font-size: 16px; margin: 18px 0 4px; }
+  p, li { font-size: 16px; line-height: 1.55; }
+  p { margin: 0 0 12px; }
+  ul, ol { margin: 0 0 12px; padding-left: 24px; }
+  li { margin: 4px 0; }
+  code { font: 14px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
+  pre { margin: 0 0 12px; padding: 12px 14px; border-radius: 10px; background: var(--bg); border: 1px solid var(--line);
+        overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  pre code { font-size: 13px; overflow-wrap: normal; }
+  .url { display: block; margin: 6px 0 0; padding: 8px 10px; border-radius: 8px; background: var(--bg);
+         user-select: all; -webkit-user-select: all; }
+  .email { font-size: 18px; font-weight: 600; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
+  footer { color: var(--muted); font-size: 13px; text-align: center; line-height: 1.6; }
+  @media (max-width: 480px) { .card { padding: 18px 16px; } h2 { font-size: 21px; } }
+</style>
+</head>
+<body>
+<!-- The support page, in Russian and then in English: what the app does,
+     the setup steps as the app's own screen gives them (ViewController.swift),
+     the sample pack and how to load it, the pack format with the sample pack
+     as its example, questions and answers, contact. The labels quoted are
+     the extension's own. The contact address is written once, at the end. -->
+<main>
+  <header>
+    <h1>Gentleman's Helper</h1>
+    <nav><a href="#ru">Русский</a> · <a href="#en">English</a> · <a href="privacy.html">Конфиденциальность / Privacy</a></nav>
+  </header>
+
+  <section id="ru" class="card">
+    <h2>Поддержка</h2>
+
+    <h3>Что делает приложение</h3>
+    <p>Gentleman's Helper — расширение Safari для iPad, которое проходит онлайн-курсы в своём темпе по пакету вопросов: узнаёт вопрос на странице курса, отвечает на него из пакета, листает слайды и запускает видео уроков. В режиме подсказок помощник выбирает ответ, а подтверждаете вы; в автоматическом режиме он подтверждает и идёт дальше сам. Само приложение показывает шаги настройки.</p>
+    <p>В приложении нет вопросов и нет описаний курсов: и то и другое приходит в пакете — файле JSON с вопросами и ответами и описанием страниц курса, который загружают файлом или по ссылке. Нужен iPad с iPadOS 17.6 или новее. Интерфейс — на русском языке.</p>
+
+    <h3>Настройка</h3>
+    <p>Помощник работает в Safari. Чтобы он появился на странице курса:</p>
+    <ol>
+      <li>Включите расширение: Настройки → Приложения → Safari → Расширения (в iPadOS 17: Настройки → Safari → Расширения).</li>
+      <li>Там же разрешите ему доступ к сайтам вашего курса: «Разрешить», а не «на один день» — иначе завтра помощник пропадёт со страницы.</li>
+      <li>Откройте курс в Safari, нажмите значок расширения в адресной строке (или кнопку расширений рядом с ним → Gentleman's Helper; в iPadOS 17: «aA» → расширение) и загрузите пакет курса: файлом или по ссылке.</li>
+      <li>На странице курса появится кнопка «H» — это панель помощника. START запускает, STOP останавливает.</li>
+    </ol>
+    <p>Файлом пакет загружают кнопкой «📤 Импорт JSON» на странице «📚 База вопросов» (её открывает кнопка в окне расширения), а пока пакета нет — и кнопкой «⬆️ Импортировать файл» в самом окне.</p>
+
+    <h3>Попробовать на демо-курсе</h3>
+    <ol>
+      <li>Сделайте шаги 1–2 для сайта <code>poohanoid.github.io</code> (или разрешите доступ, когда Safari спросит).</li>
+      <li>Откройте демо-курс: <a href="./">https://poohanoid.github.io/gentlemans-helper-demo/</a>. Ссылка на пакет есть и на его первом экране.</li>
+      <li>Откройте окно расширения, вставьте в поле ссылку на пример пакета и нажмите «🔗 Загрузить по ссылке»:
+        <code class="url">https://poohanoid.github.io/gentlemans-helper-demo/sample-pack.json</code>
+        Окно сообщит «Загружено: 3 вопроса, профилей: 1».</li>
+      <li>Справа на странице курса появится круглая кнопка «H» (если нет — обновите страницу).</li>
+      <li>Выберите режим «💡 Подсказки (рекомендуется)» или «🤖 Полный автомат» и нажмите «▶️ START».</li>
+      <li>Помощник откроет курс, ответит на вопросы 1–3 и пролистает слайд; в режиме подсказок он выбирает ответ, а Confirm нажимаете вы. Вопроса 4 в пакете нет нарочно: панель скажет «Нет в базе» — ответьте сами, и помощник пойдёт дальше. В конце панель скажет «Курс завершён».</li>
+    </ol>
+    <p>Паузы нарочные, чтобы работа шла в темпе человека: по умолчанию 5 с перед выбором ответа, 15–25 с перед Confirm и 10–15 с перед Next. Они меняются в «⚙️ Настройки».</p>
+
+    <h3>Формат пакета</h3>
+    <p>Пакет — файл JSON. Пример — пакет демо-курса целиком:</p>
+    <pre><code>{
+  "format": "gentlemans-helper-pack",
+  "version": "2026-09-25",
+  "profiles": [
+    {
+      "id": "demo-v1",
+      "when": ["#player.gh-demo"],
+      "marker": { "selector": ".screen .counter" },
+      "markerDecides": true,
+      "kind": {
+        "selector": ".screen .counter + .kind",
+        "values": [
+          { "text": "^select$", "mode": "single" },
+          { "text": "^true or false$", "mode": "single" },
+          { "text": "^multiple choices$", "mode": "multi" }
+        ]
+      },
+      "question": ".screen .stem",
+      "options": ".screen li.option",
+      "optionText": ".text",
+      "optionLabel": ".label",
+      "optionChecked": ".chosen, .correct, .wrong",
+      "confirm": "button.action",
+      "action": {
+        "selector": "button.action",
+        "pending": "^confirm$",
+        "ended": "^next$"
+      },
+      "course": {
+        "selector": "header h1",
+        "strip": "^Sample course:\\s*"
+      }
+    }
+  ],
+  "questions": {
+    "Office fire safety": {
+      "What should you do first when you discover a small fire in the office?": "Raise the alarm",
+      "Fire doors may be propped open during working hours.": "False",
+      "Which of these belong in a first-aid kit?": "Plasters; Sterile dressings; Disposable gloves"
+    }
+  }
+}</code></pre>
+    <h4>Вопросы</h4>
+    <ul>
+      <li><code>questions</code> — категории (обычно курсы), в них вопросы с ответами: <code>{"Категория": {"Вопрос": "Ответ"}}</code>. Категория может делиться на разделы: <code>{"Категория": {"Раздел": {"Вопрос": "Ответ"}}}</code>.</li>
+      <li>Ответ — строка. Несколько правильных вариантов пишутся через «; ». Для вопроса со свободным ответом — текст, который нужно вписать.</li>
+      <li>Вопрос и ответ сравниваются со страницей слово в слово: регистр, знаки препинания и пробелы не важны, слова — важны. Похожий, но не тот же вопрос помощник только показывает и ничего не нажимает.</li>
+      <li>При загрузке ответы из файла заменяют сохранённые ответы на те же вопросы; остальные сохранённые вопросы остаются. Файл, в котором есть только категории с вопросами, без <code>format</code> и <code>profiles</code>, тоже принимается.</li>
+    </ul>
+    <h4>Профили</h4>
+    <p><code>profiles</code> — описания страниц курса селекторами CSS: помощник ничего не угадывает и работает только там, где применим профиль. Профиль с тем же <code>id</code> заменяет сохранённый. Шаблоны надписей — регулярные выражения в строках, без учёта регистра.</p>
+    <ul>
+      <li><code>id</code> — имя профиля. Обязательно.</li>
+      <li><code>when</code> — селекторы; профиль применяется только на странице, где есть все они. Обязательно.</li>
+      <li><code>question</code>, <code>options</code> — где текст вопроса и строки вариантов. Обязательны, если плеер задаёт вопросы.</li>
+      <li><code>optionText</code>, <code>optionLabel</code> — текст варианта внутри строки и метка («a», «B.»), которую нужно отбросить.</li>
+      <li><code>optionChecked</code> — как страница отмечает выбранный вариант: по нему помощник проверяет, что выбор принят.</li>
+      <li><code>marker</code>, <code>markerDecides</code> — надпись страницы «это вопрос» (<code>selector</code>, по желанию <code>text</code>); с <code>markerDecides: true</code> экран без неё — не вопрос.</li>
+      <li><code>kind</code> — где страница пишет тип вопроса (<code>selector</code>) и какие надписи (<code>values[].text</code>) каким режимам соответствуют: <code>single</code> — один вариант, <code>multi</code> — несколько, <code>scale</code> — шкала, <code>text</code> — свободный ответ (поле ввода — <code>input</code>, по умолчанию <code>textarea</code>). Тип, которого нет в списке, помощник оставляет вам.</li>
+      <li><code>action</code> — кнопка вопроса и её надписи: <code>pending</code> — ответ ещё не подтверждён («Confirm»), <code>ended</code> — подтверждён («Next»).</li>
+      <li><code>next</code> — элемент, которым страница ведёт дальше. Если он указан, помощник нажимает только его и только когда страница его показывает; если нет — ищет кнопку с надписью next, continue, start, begin или proceed (после Confirm, нажатого им самим, — next, continue, forward или proceed). Плеер без вопросов (презентация) описывается профилем без <code>question</code> и <code>options</code> и обязательно с <code>next</code>.</li>
+      <li><code>confirm</code> — кнопка подтверждения; сейчас помощник нажимает Confirm по <code>action</code>, а без него — по надписи (confirm, submit, check, ok).</li>
+      <li><code>course</code> — где плеер пишет название курса (<code>selector</code>) и какую приставку убрать (<code>strip</code>); это категория для ответов, взятых со страницы курса.</li>
+      <li><code>done</code> — признак конца теста или курса (<code>selector</code>, по желанию <code>text</code>): там помощник останавливается.</li>
+    </ul>
+
+    <h3>Вопросы и ответы</h3>
+    <h4>Кнопка «H» не появляется</h4>
+    <p>Проверьте, что расширение включено и сайту курса дан доступ («Разрешить», а не «на один день»); что пакет загружен — в окне расширения нет предупреждения о пакете; и что профиль пакета описывает именно этот плеер. После выдачи доступа обновите страницу. На странице, где курса нет, окно расширения пишет «⋯ Курс не найден на этой странице».</p>
+    <h4>Окно расширения пишет «⋯ Страница не ответила»</h4>
+    <p>Кнопка «H» на странице есть, а окно расширения до неё не достаёт. Управляйте с панели «H» или обновите страницу. Не помогло — закройте Safari и откройте снова: так бывает сразу после обновления приложения.</p>
+    <h4>Панель пишет «Нет в базе»</h4>
+    <p>Этого вопроса нет в пакете слово в слово. Ответьте сами и нажмите Confirm — дальше помощник продолжит. Вопрос можно добавить на странице «📚 База вопросов» («➕ Добавить вопрос»).</p>
+    <h4>Панель пишет «Проверьте ответ»</h4>
+    <p>В базе похожий, но не тот же вопрос, или сохранённый ответ не совпал ни с одним вариантом дословно. Помощник показывает ответ из базы и ничего не нажимает — решаете вы.</p>
+    <h4>Чем отличаются режимы?</h4>
+    <p>«💡 Подсказки»: помощник выбирает ответ, Confirm нажимаете вы; слайды, видео и Next после ответа — его. «🤖 Полный автомат»: он и подтверждает, и идёт дальше сам, в том числе на оцениваемых тестах.</p>
+    <h4>Можно ли так проходить мой курс?</h4>
+    <p>Это решают правила вашего курса. Проверьте их, прежде чем включать автоматический режим, особенно на оцениваемом тесте.</p>
+    <h4>Что значит «ответ со страницы»?</h4>
+    <p>Один конкретный плеер курсов держит правильные ответы в самой странице. На нём помощник берёт ответ оттуда — в том числе на вопросы, которых нет в пакете, — и сразу добавляет его в вашу базу на iPad.</p>
+    <h4>Что он пишет в вопросы со свободным ответом?</h4>
+    <p>Ответ из базы, а если вопроса там нет — текст из «⚙️ Настройки» («No» по умолчанию). Оставьте это поле пустым, чтобы писать такие ответы самим. Текст, который уже есть в поле, помощник не перезаписывает.</p>
+    <h4>Видео не запускается, панель пишет «Ролик ждёт касания»</h4>
+    <p>Safari на iPad включает звук только после касания. Коснитесь страницы в любом месте — ролик запустится. Помощник не перематывает и не ускоряет видео на экране. Чтобы следующий ролик запустился без касания, он проигрывает беззвучный звук или предыдущий ролик — без звука и скрытым.</p>
+    <h4>Панель пишет «Экран возвращается — решите сами»</h4>
+    <p>После Next курс снова показывает тот же экран. Помощник один раз за каждый START перезагружает страницу курса; если не помогло, этот экран остаётся вам.</p>
+    <h4>Панель пишет «Отметьте согласие сами»</h4>
+    <p>Рядом с кнопкой есть галочка согласия. Такие галочки помощник не ставит никогда.</p>
+    <h4>Как перенести или сохранить базу?</h4>
+    <p>На странице «📚 База вопросов»: «📥 Экспорт JSON» и «📤 Импорт JSON»; «📄 Экспорт PDF» — для чтения, с главой на каждый курс.</p>
+    <h4>Куда уходят мои данные? Как удалить всё?</h4>
+    <p>Никуда: всё хранится на iPad (подробнее — <a href="privacy.html">политика конфиденциальности</a>). Чтобы удалить всё, удалите приложение Gentleman's Helper.</p>
+
+    <h3>Связь</h3>
+    <p>Если что-то не работает, напишите по адресу в конце страницы: модель iPad, версию iPadOS, что показывает панель (строки её журнала можно сфотографировать) и что вы делали.</p>
+  </section>
+
+  <section id="en" class="card" lang="en">
+    <h2>Support</h2>
+
+    <h3>What the app does</h3>
+    <p>Gentleman's Helper is a Safari extension for iPad that works through self-paced online courses with a question pack: it recognises the question on the course page, answers it from the pack, moves through slides and plays the lesson videos. In hint mode the helper selects the answer and you confirm it; in automatic mode it confirms and moves on by itself. The app itself shows the setup steps.</p>
+    <p>The app contains no questions and no course descriptions: both come in a pack — a JSON file with questions and answers and a description of the course pages — loaded from a file or a link. It needs an iPad with iPadOS 17.6 or later. The interface is in Russian; the labels below are quoted as they appear, with a translation.</p>
+
+    <h3>Setup</h3>
+    <p>The helper works in Safari. To have it appear on the course page:</p>
+    <ol>
+      <li>Turn the extension on: Settings → Apps → Safari → Extensions (on iPadOS 17: Settings → Safari → Extensions).</li>
+      <li>In the same place, allow it access to your course’s websites: “Allow” (“Always Allow” when Safari asks), not “Allow for One Day” — otherwise the helper will be gone from the page tomorrow.</li>
+      <li>Open the course in Safari, tap the extension’s icon in the address bar (or the extensions button next to it → Gentleman's Helper; on iPadOS 17: “aA” → the extension) and load the course pack, from a file or by link.</li>
+      <li>A round “H” button appears on the course page: that is the helper’s panel. START starts it, STOP stops it.</li>
+    </ol>
+    <p>To load a pack from a file, use «📤 Импорт JSON» (Import JSON) on the «📚 База вопросов» (Question database) page, which a button in the extension’s popup opens; while no pack is loaded, the popup also has «⬆️ Импортировать файл» (Import a file).</p>
+
+    <h3>Try it on the sample course</h3>
+    <ol>
+      <li>Do steps 1–2 for the site <code>poohanoid.github.io</code> (or allow access when Safari asks).</li>
+      <li>Open the sample course: <a href="./">https://poohanoid.github.io/gentlemans-helper-demo/</a>. Its first screen shows the pack link too.</li>
+      <li>Open the extension’s popup, paste the sample pack’s link into the field and tap «🔗 Загрузить по ссылке» (Load from link):
+        <code class="url">https://poohanoid.github.io/gentlemans-helper-demo/sample-pack.json</code>
+        The popup reports «Загружено: 3 вопроса, профилей: 1» (Loaded: 3 questions, profiles: 1).</li>
+      <li>A round “H” button appears at the right edge of the course page (if not, reload the page).</li>
+      <li>Choose «💡 Подсказки (рекомендуется)» (hints, recommended) or «🤖 Полный автомат» (fully automatic) and tap «▶️ START».</li>
+      <li>The helper opens the course, answers questions 1–3 and moves past the slide; in hint mode it selects the answer and you tap Confirm. Question 4 is left out of the pack on purpose: the panel says «Нет в базе» (not in the database) — answer it yourself and the helper carries on. At the end the panel says «Курс завершён» (course completed).</li>
+    </ol>
+    <p>The pauses are deliberate, to keep a person’s pace: by default 5 s before selecting an answer, 15–25 s before Confirm and 10–15 s before Next. They are set in «⚙️ Настройки» (Settings).</p>
+
+    <h3>Pack format</h3>
+    <p>A pack is a JSON file. The example is the sample course’s pack, in full:</p>
+    <pre><code>{
+  "format": "gentlemans-helper-pack",
+  "version": "2026-09-25",
+  "profiles": [
+    {
+      "id": "demo-v1",
+      "when": ["#player.gh-demo"],
+      "marker": { "selector": ".screen .counter" },
+      "markerDecides": true,
+      "kind": {
+        "selector": ".screen .counter + .kind",
+        "values": [
+          { "text": "^select$", "mode": "single" },
+          { "text": "^true or false$", "mode": "single" },
+          { "text": "^multiple choices$", "mode": "multi" }
+        ]
+      },
+      "question": ".screen .stem",
+      "options": ".screen li.option",
+      "optionText": ".text",
+      "optionLabel": ".label",
+      "optionChecked": ".chosen, .correct, .wrong",
+      "confirm": "button.action",
+      "action": {
+        "selector": "button.action",
+        "pending": "^confirm$",
+        "ended": "^next$"
+      },
+      "course": {
+        "selector": "header h1",
+        "strip": "^Sample course:\\s*"
+      }
+    }
+  ],
+  "questions": {
+    "Office fire safety": {
+      "What should you do first when you discover a small fire in the office?": "Raise the alarm",
+      "Fire doors may be propped open during working hours.": "False",
+      "Which of these belong in a first-aid kit?": "Plasters; Sterile dressings; Disposable gloves"
+    }
+  }
+}</code></pre>
+    <h4>Questions</h4>
+    <ul>
+      <li><code>questions</code> — categories (usually courses) holding questions with their answers: <code>{"Category": {"Question": "Answer"}}</code>. A category may be split into sections: <code>{"Category": {"Section": {"Question": "Answer"}}}</code>.</li>
+      <li>An answer is a string. Several correct options are joined with “; ”. For a free-text question it is the text to write in.</li>
+      <li>Questions and answers are compared with the page word for word: case, punctuation and spacing do not matter, the words do. A question that only resembles a stored one is shown, and nothing is pressed.</li>
+      <li>On loading, the file’s answers replace stored answers to the same questions; other stored questions stay. A file holding only categories of questions, with no <code>format</code> or <code>profiles</code>, is accepted too.</li>
+    </ul>
+    <h4>Profiles</h4>
+    <p><code>profiles</code> describe the course pages in CSS selectors: the helper guesses nothing and works only where a profile applies. A profile with the same <code>id</code> replaces the stored one. Wordings are regular expressions written as strings, matched without regard to case.</p>
+    <ul>
+      <li><code>id</code> — the profile’s name. Required.</li>
+      <li><code>when</code> — selectors; the profile applies only on a page where all of them are present. Required.</li>
+      <li><code>question</code>, <code>options</code> — where the question text and the option rows are. Required for a player that asks questions.</li>
+      <li><code>optionText</code>, <code>optionLabel</code> — the option’s text inside its row, and the label (“a”, “B.”) to drop from it.</li>
+      <li><code>optionChecked</code> — how the page marks a chosen option; the helper reads it back to check that a choice took.</li>
+      <li><code>marker</code>, <code>markerDecides</code> — the page’s own “this is a question” (<code>selector</code>, optionally <code>text</code>); with <code>markerDecides: true</code> a screen without it is not a question.</li>
+      <li><code>kind</code> — where the page states the kind of question (<code>selector</code>) and which wordings (<code>values[].text</code>) map to which mode: <code>single</code> — one option, <code>multi</code> — several, <code>scale</code> — a scale, <code>text</code> — free text (its field is <code>input</code>, <code>textarea</code> by default). A kind not listed is left to you.</li>
+      <li><code>action</code> — the question’s own button and its wordings: <code>pending</code> — the answer is not yet confirmed (“Confirm”), <code>ended</code> — it is (“Next”).</li>
+      <li><code>next</code> — the element the page moves on with. Where it is given, the helper presses only that element, and only while the page shows it; where it is not, it looks for a button labelled next, continue, start, begin or proceed (after a Confirm of its own: next, continue, forward or proceed). A player that asks nothing (a presentation) has a profile with no <code>question</code> and <code>options</code>, and must name <code>next</code>.</li>
+      <li><code>confirm</code> — the confirm button; the helper currently presses Confirm through <code>action</code>, and without it by label (confirm, submit, check, ok).</li>
+      <li><code>course</code> — where the player prints the course’s name (<code>selector</code>) and a prefix to drop (<code>strip</code>); it is the category for answers taken from the course page.</li>
+      <li><code>done</code> — the sign that a test or the course is over (<code>selector</code>, optionally <code>text</code>); the helper stops there.</li>
+    </ul>
+
+    <h3>Questions and answers</h3>
+    <h4>The “H” button does not appear</h4>
+    <p>Check that the extension is on and allowed on the course’s site (“Allow” or “Always Allow”, not “Allow for One Day”); that a pack is loaded — the popup shows no warning about the pack; and that the pack’s profile describes this very player. Reload the page after granting access. On a page with no course, the popup says «⋯ Курс не найден на этой странице» (no course found on this page).</p>
+    <h4>The popup says «⋯ Страница не ответила» (the page did not answer)</h4>
+    <p>The “H” button is on the page, but the popup cannot reach it. Use the “H” panel, or reload the page. If that does not help, close Safari and open it again: this can happen right after the app is updated.</p>
+    <h4>The panel says «Нет в базе» (not in the database)</h4>
+    <p>The question is not in the pack word for word. Answer it yourself and tap Confirm; the helper carries on from there. You can add the question on the «📚 База вопросов» page («➕ Добавить вопрос», Add a question).</p>
+    <h4>The panel says «Проверьте ответ» (check the answer)</h4>
+    <p>The database holds a similar but different question, or the stored answer matched no option word for word. The helper shows the stored answer and presses nothing: the choice is yours.</p>
+    <h4>How do the modes differ?</h4>
+    <p>«💡 Подсказки» (hints): the helper selects the answer and you tap Confirm; slides, videos and the Next after an answer are its job. «🤖 Полный автомат» (automatic): it confirms and moves on by itself, graded tests included.</p>
+    <h4>May I use it on my course?</h4>
+    <p>That is for your course’s rules to say. Check them before you turn on automatic mode, above all on a graded test.</p>
+    <h4>What does “answer from the page” mean?</h4>
+    <p>One particular course player keeps the correct answers in the page itself. There the helper takes the answer from the page — also for questions the pack does not hold — and at once adds it to your database on the iPad.</p>
+    <h4>What does it write into free-text questions?</h4>
+    <p>The answer from the database; for a question not in it, the text set in «⚙️ Настройки» (Settings) — “No” by default. Leave that setting empty to write such answers yourself. Text already in the field is never overwritten.</p>
+    <h4>A video does not start; the panel says «Ролик ждёт касания» (the clip is waiting for a tap)</h4>
+    <p>Safari on iPad plays sound only after a touch. Tap anywhere on the page and the clip starts. The helper never skips ahead in or speeds up the video on screen. So that the next clip can start without a tap, it plays a silent sound, or the previous clip muted and hidden.</p>
+    <h4>The panel says «Экран возвращается — решите сами» (the screen keeps coming back)</h4>
+    <p>After Next the course shows the same screen again. The helper reloads the course page once per START; if that does not help, the screen is left to you.</p>
+    <h4>The panel says «Отметьте согласие сами» (tick the consent yourself)</h4>
+    <p>There is a consent box next to the button. The helper never ticks such boxes.</p>
+    <h4>How do I move or back up the database?</h4>
+    <p>On the «📚 База вопросов» page: «📥 Экспорт JSON» (Export) and «📤 Импорт JSON» (Import); «📄 Экспорт PDF» is for reading, with a chapter per course.</p>
+    <h4>Where does my data go? How do I delete everything?</h4>
+    <p>Nowhere: it all stays on the iPad (see the <a href="privacy.html">privacy policy</a>). To delete everything, delete the Gentleman's Helper app.</p>
+
+    <h3>Contact</h3>
+    <p>If something does not work, write to the address at the end of this page: your iPad model, the iPadOS version, what the panel shows (a photo of its log lines helps) and what you did.</p>
+  </section>
+
+  <section id="contact" class="card">
+    <h2>Связь · Contact</h2>
+    <p>Поддержка и вопросы о приложении · Support and questions about the app:</p>
+    <p class="email"><a class="mail">gentlemans.apps@icloud.com</a></p>
+  </section>
+
+  <footer>Gentleman's Helper · <a href="privacy.html">Конфиденциальность / Privacy</a> · <a href="./">Демо-курс / Sample course</a></footer>
+</main>
+<script>
+  // The address is written once, as the link's text; the mail link is made
+  // from it, so that replacing that one word is all a new address takes.
+  Array.prototype.forEach.call(document.querySelectorAll('a.mail'), function (a) {
+    a.href = 'mailto:' + a.textContent.trim();
+  });
+</script>
+</body>
+</html>

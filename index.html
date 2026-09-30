@@ -41,6 +41,12 @@
   .slide h2, .done h2 { font-size: 24px; margin: 0 0 12px; }
   .slide p, .done p { font-size: 17px; line-height: 1.55; margin: 0 0 20px; }
   .done a { color: var(--muted); }
+  .pack { border: 1px dashed var(--line); border-radius: 10px; padding: 14px 16px; margin: 0 0 20px; }
+  .pack p { font-size: 15px; line-height: 1.45; margin: 0; }
+  .pack-url { display: block; margin: 10px 0; padding: 10px 12px; border-radius: 8px; background: var(--bg);
+              font: 14px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere;
+              user-select: all; -webkit-user-select: all; }
+  .pack a { color: var(--accent); }
   footer { margin-top: 24px; color: var(--muted); font-size: 12px; text-align: center; line-height: 1.5; }
 </style>
 </head>
@@ -66,9 +72,16 @@
   // which options the course itself counts as right. That key is the
   // course's own, for painting the rows after Confirm; the extension never
   // reads it. What the extension knows comes from the pack the user loaded.
+  //
+  // The intro also prints the sample pack's link, for whoever tries the
+  // extension here on an iPad: as text to copy, and as a link. Its wording
+  // stays clear of the words the extension reads as a way forward (next,
+  // start, continue…) — the intro's own button is the only one it presses.
+  var PACK_URL = 'https://poohanoid.github.io/gentlemans-helper-demo/sample-pack.json';
   var SCREENS = [
     { type: 'intro', title: 'Welcome to the sample course',
-      text: 'Four short questions and one slide. Open the extension’s popup, load the sample pack, press START, and watch.',
+      text: 'Four short questions and one slide. Open the extension’s popup, load the sample pack, press START, and watch (in hint mode, you tap Confirm).',
+      pack: PACK_URL,
       button: 'Start course' },
     { type: 'question', kind: 'Select',
       stem: 'What should you do first when you discover a small fire in the office?',
@@ -134,6 +147,11 @@
     } else {
       screenEl.innerHTML =
         '<section class="screen slide"><h2>' + esc(s.title) + '</h2><p>' + esc(s.text) + '</p>' +
+        (s.pack
+          ? '<div class="pack"><p>The sample pack: copy this link into the extension’s popup and tap «🔗\u00a0Загрузить по ссылке».</p>' +
+            '<code class="pack-url">' + esc(s.pack) + '</code>' +
+            '<p><a href="' + esc(s.pack) + '" target="_blank" rel="noopener">Open the pack</a> · touch and hold it to copy the link</p></div>'
+          : '') +
         '<button class="start">' + esc(s.button) + '</button></section>';
     }
   }
